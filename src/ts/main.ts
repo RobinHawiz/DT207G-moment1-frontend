@@ -7,26 +7,15 @@ import { DataList } from "@ts/DataList";
 // Functions
 import { fetchData } from "@ts/fetch-data";
 import { displayDataList } from "@ts/display-data";
-import { getLocalStorageData, updateLocalStorage } from "@ts/local-storage";
 import { initFormValidation } from "@ts/validate-form";
 import { processFormData } from "./process-form-data";
 
 async function main(): Promise<void> {
-  let data: DataList<ICourseInfo>;
-  let localStorageData: DataList<ICourseInfo> = new DataList(
-    getLocalStorageData<ICourseInfo>("Courses")
+  const data: DataList<ICourseInfo> = new DataList<ICourseInfo>(
+    await fetchData<Array<ICourseInfo>>("http://localhost:4000/courses/", {
+      method: "GET",
+    })
   );
-  // Use local storage data if available, otherwise fetch new data.
-  if (localStorageData.getDataList().length !== 0) data = localStorageData;
-  else {
-    data = new DataList<ICourseInfo>(
-      await fetchData<Array<ICourseInfo>>(
-        "https://webbutveckling.miun.se/files/ramschema_ht24.json"
-      )
-    );
-    updateLocalStorage<ICourseInfo>("Courses", data.getDataList());
-  }
-
   displayDataList(data.getDataList());
   initFormValidation(processFormData);
 }

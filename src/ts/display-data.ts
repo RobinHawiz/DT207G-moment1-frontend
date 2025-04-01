@@ -13,22 +13,24 @@ export function displayDataList(data: Array<ICourseInfo>): void {
   // Create a document fragment to batch DOM updates.
   const fragment: DocumentFragment = document.createDocumentFragment();
 
-  data.forEach(({ code, coursename, progression, syllabus }) => {
+  data.forEach(({ CourseCode, CourseName, Progression, Syllabus }) => {
     const tr: HTMLTableRowElement = document.createElement("tr");
     // Create an array excluding syllabus (we handle it separately).
-    [code, coursename, progression].forEach((text: string, index: number) => {
-      const td: HTMLTableCellElement = document.createElement("td");
-      if (index === 0) {
-        const a: HTMLAnchorElement = document.createElement("a");
-        a.innerText = text;
-        a.href = syllabus;
-        a.target = "_blank";
-        td.appendChild(a);
-      } else {
-        td.innerText = text;
+    [CourseCode, CourseName, Progression].forEach(
+      (text: string, index: number) => {
+        const td: HTMLTableCellElement = document.createElement("td");
+        if (index === 0) {
+          const a: HTMLAnchorElement = document.createElement("a");
+          a.innerText = text;
+          a.href = Syllabus;
+          a.target = "_blank";
+          td.appendChild(a);
+        } else {
+          td.innerText = text;
+        }
+        tr.appendChild(td);
       }
-      tr.appendChild(td);
-    });
+    );
     fragment.appendChild(tr);
   });
   tbody.appendChild(fragment);

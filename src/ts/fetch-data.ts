@@ -1,6 +1,13 @@
-export async function fetchData<T>(url: string): Promise<T> {
+export async function fetchData<T>(
+  url: string,
+  options: {
+    method?: "POST" | "GET" | "DELETE";
+    headers?: HeadersInit;
+    body?: BodyInit;
+  } = {}
+): Promise<T> {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(`Network error: ${response.status}`);
     }

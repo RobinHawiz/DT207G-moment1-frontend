@@ -1,6 +1,9 @@
 export interface ICourseInfo {
-  code: string;
-  coursename: string;
-  progression: string;
-  syllabus: string;
+  Id: number;
+  CourseCode: string;
+  CourseName: string;
+  Progression: string;
+  Syllabus: string;
 }
+
+export type CoursePayload = Omit<ICourseInfo, "id">;
