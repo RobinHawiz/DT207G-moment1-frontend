@@ -30,7 +30,7 @@ export function initFormValidation(submitCallback: (e: Event) => void): void {
     // Check if the entered course code already exists in the data list.
     let courseCodeIsNotValid: ICourseInfo | undefined = data
       .getDataList()
-      .find(({ CourseCode }) => CourseCode === courseCodeInput.value);
+      .find(({ courseCode }) => courseCode === courseCodeInput.value);
     // If the course code is not unique, show an error for course code.
     if (courseCodeIsNotValid) {
       validateField(
