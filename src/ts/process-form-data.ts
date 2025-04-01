@@ -9,12 +9,12 @@ export async function processFormData(e: Event): Promise<void> {
   const courseNameInput: HTMLInputElement = form.querySelector("#course-name")!;
   const progressionInput: HTMLInputElement =
     form.querySelector("#progression")!;
+  const syllabusInput: HTMLInputElement = form.querySelector("#syllabus")!;
 
   const courseCode: string = courseCodeInput.value;
   const courseName: string = courseNameInput.value;
   const progression: string = progressionInput.value;
-  const syllabus: string =
-    "https://www.youtube.com/watch?v=WIRK_pGdIdA&list=PLpQpolEIRhPtKIte1nTmjYcJCriNwj20L&ab_channel=doober43";
+  const syllabus: string = syllabusInput.value;
 
   // Create a new course object using the form data.
   const coursePayload: CoursePayload = {

@@ -30,7 +30,7 @@ main {
     margin-top: 7rem;
   }
   form {
-    @include m.flex(end, space-between, row);
+    @include m.flex(end, space-between, column);
     gap: 1rem;
     max-width: 66rem;
     width: 100%;
@@ -41,14 +41,12 @@ main {
       justify-content: center;
     }
     .label-input-container {
-      @include m.flex(normal, space-between, row);
+      @include m.flex(normal, space-between, column);
       width: 100%;
     }
     label {
       @include m.flex(normal, normal, column);
-    }
-    label:nth-child(2) {
-      margin: 0 1rem;
+      margin-top: 1rem;
     }
     input {
       width: 100%;
@@ -56,6 +54,7 @@ main {
       padding: 0.3rem;
     }
     .button-wrapper {
+      margin-top: 1rem;
       position: relative;
       pointer-events: none;
       &:hover::before {
