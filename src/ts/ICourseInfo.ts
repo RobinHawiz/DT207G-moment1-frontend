@@ -6,4 +6,4 @@ export interface ICourseInfo {
   Syllabus: string;
 }
 
-export type CoursePayload = Omit<ICourseInfo, "id">;
+export type CoursePayload = Omit<ICourseInfo, "Id">;
