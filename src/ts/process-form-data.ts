@@ -1,9 +1,7 @@
-import { DataList } from "@ts/DataList";
-import { ICourseInfo } from "@ts/ICourseInfo";
-import { getLocalStorageData, updateLocalStorage } from "@ts/local-storage";
-import { displayDataList } from "@ts/display-data";
+import { CoursePayload } from "@ts/ICourseInfo";
+import { fetchData } from "./fetch-data";
 
-export function processFormData(e: Event): void {
+export async function processFormData(e: Event): Promise<void> {
   // Typecasting because typescript is acting up.
   const form: HTMLFormElement = <HTMLFormElement>e.target;
 
@@ -12,23 +10,31 @@ export function processFormData(e: Event): void {
   const progressionInput: HTMLInputElement =
     form.querySelector("#progression")!;
 
-  const code: string = courseCodeInput.value;
-  const coursename: string = courseNameInput.value;
+  const courseCode: string = courseCodeInput.value;
+  const courseName: string = courseNameInput.value;
   const progression: string = progressionInput.value;
   const syllabus: string =
     "https://www.youtube.com/watch?v=WIRK_pGdIdA&list=PLpQpolEIRhPtKIte1nTmjYcJCriNwj20L&ab_channel=doober43";
 
   // Create a new course object using the form data.
-  const course: ICourseInfo = { code, coursename, progression, syllabus };
+  const coursePayload: CoursePayload = {
+    courseCode,
+    courseName,
+    progression,
+    syllabus,
+  };
 
-  let data: DataList<ICourseInfo> = new DataList(
-    getLocalStorageData<ICourseInfo>("Courses")
+  const response: { message: string } = await fetchData<{ message: string }>(
+    "http://localhost:4000/courses/insert",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(coursePayload),
+    }
   );
 
-  // Update the local storage with the new course data and display it.
-  data.addItem(course);
-  updateLocalStorage<ICourseInfo>("Courses", data.getDataList());
-  displayDataList(data.getDataList());
-
-  alert("Din kurs har lagts till längst ner i listan!");
+  alert(response.message);
 }
