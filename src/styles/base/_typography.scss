@@ -10,6 +10,14 @@ h1 {
   }
 }
 
+nav {
+  font-size: v.$nav-font;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  @include m.media-query(mobile) {
+    font-size: v.$nav-font-mobile;
+  }
+}
+
 form {
   font-size: v.$form-font;
   font-family: "Inter", Arial, Helvetica, sans-serif;

@@ -10,10 +10,22 @@ html {
   font-size: 62.5%;
 }
 
+nav {
+  @include m.flex(center, center, row);
+  min-height: 10vh;
+  min-height: 10svh;
+  ul {
+    @include m.flex(normal, normal, row);
+  }
+  li {
+    padding: 2rem;
+    list-style-type: none;
+  }
+}
+
 main {
   @include m.flex(center, normal, column);
   margin: 0 5%;
-  margin-top: 10rem;
   @include m.media-query(mobile) {
     margin-top: 7rem;
   }
