@@ -1,5 +1,4 @@
 import { ICourseInfo } from "@ts/ICourseInfo";
-import { DataList } from "@ts/DataList";
 import { fetchData } from "./fetch-data";
 
 export function initFormValidation(submitCallback: (e: Event) => void): void {
@@ -21,16 +20,17 @@ export function initFormValidation(submitCallback: (e: Event) => void): void {
 
   async function validateForm(e: Event): Promise<void> {
     e.preventDefault();
-    const data: DataList<ICourseInfo> = new DataList<ICourseInfo>(
-      await fetchData<Array<ICourseInfo>>("http://localhost:4000/courses/", {
+    const data: Array<ICourseInfo> = await fetchData<Array<ICourseInfo>>(
+      "http://localhost:4000/courses/",
+      {
         method: "GET",
-      })
+      }
     );
     let formIsValid: boolean = true; // Flag to track if the form is valid or not.
     // Check if the entered course code already exists in the data list.
-    let courseCodeIsNotValid: ICourseInfo | undefined = data
-      .getDataList()
-      .find(({ courseCode }) => courseCode === courseCodeInput.value);
+    let courseCodeIsNotValid: ICourseInfo | undefined = data.find(
+      ({ courseCode }) => courseCode === courseCodeInput.value
+    );
     // If the course code is not unique, show an error for course code.
     if (courseCodeIsNotValid) {
       validateField(
