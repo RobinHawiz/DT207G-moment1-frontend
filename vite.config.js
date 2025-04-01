@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import checker from "vite-plugin-checker";
 
-const base = "/DT208G-moment1/";
+const base = "/DT207G-moment1/";
 const root = "src/pages";
 const publicDir = "../assets";
 const outDir = "../../dist";
