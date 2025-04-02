@@ -1,4 +1,6 @@
 import { ICourseInfo } from "@ts/ICourseInfo";
+import { deleteCourse } from "./deleteCourse";
+import { main } from "./main";
 
 // This function cannot be generic because it relies on properties specific to the ICourseInfo interface.
 export function displayDataList(data: Array<ICourseInfo>): void {
@@ -13,10 +15,10 @@ export function displayDataList(data: Array<ICourseInfo>): void {
   // Create a document fragment to batch DOM updates.
   const fragment: DocumentFragment = document.createDocumentFragment();
 
-  data.forEach(({ courseCode, courseName, progression, syllabus }) => {
+  data.forEach(({ id, courseCode, courseName, progression, syllabus }) => {
     const tr: HTMLTableRowElement = document.createElement("tr");
     // Create an array excluding syllabus (we handle it separately).
-    [courseCode, courseName, progression].forEach(
+    [courseCode, courseName, progression, id.toString()].forEach(
       (text: string, index: number) => {
         const td: HTMLTableCellElement = document.createElement("td");
         if (index === 0) {
@@ -25,6 +27,19 @@ export function displayDataList(data: Array<ICourseInfo>): void {
           a.href = syllabus;
           a.target = "_blank";
           td.appendChild(a);
+        } else if (index === 3) {
+          const deleteButton = document.createElement("button");
+          deleteButton.addEventListener("click", async () => {
+            try {
+              const response = await deleteCourse(id);
+              main(); // Refreshes the table with the updated course data.
+              alert(response.message);
+            } catch (error) {
+              console.log(error);
+            }
+          });
+          deleteButton.innerText = "X";
+          td.appendChild(deleteButton);
         } else {
           td.innerText = text;
         }

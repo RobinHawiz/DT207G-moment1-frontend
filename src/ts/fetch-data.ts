@@ -16,7 +16,8 @@ export async function fetchData<T>(
         const errorBody: IErrorMessage = await response.json();
         throw errorBody;
       } else {
-        throw new Error(`Unknown error from server`);
+        const fallbackText = await response.text();
+        throw new Error(`Request failed (${response.status}): ${fallbackText}`);
       }
     }
     const data: T = await response.json();
