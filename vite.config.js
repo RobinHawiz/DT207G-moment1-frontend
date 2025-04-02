@@ -18,6 +18,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, root, "index.html"),
         addCourse: resolve(__dirname, root, "add-course", "index.html"),
+        about: resolve(__dirname, root, "about", "index.html"),
       },
       output: {
         entryFileNames: "js/[name]-[hash].js", // JS files
