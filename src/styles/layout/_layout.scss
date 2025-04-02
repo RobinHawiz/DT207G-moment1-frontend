@@ -112,8 +112,24 @@ main {
       text-align: center;
     }
   }
+  ul {
+    margin-left: 1.5rem;
+    align-self: self-start;
+    li {
+      margin: 1rem 0;
+    }
+  }
 }
 
 h1 {
   text-align: center;
+}
+
+h2 {
+  margin-top: 2rem;
+}
+
+p {
+  margin: 1rem 0;
+  align-self: self-start;
 }

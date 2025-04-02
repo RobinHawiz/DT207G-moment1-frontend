@@ -8,11 +8,23 @@ h1 {
   color: v.$h1-color;
 }
 
+h2 {
+  color: v.$h2-color;
+}
+
+p {
+  color: v.$p-color;
+}
+
 a {
   color: v.$a-color;
   &:hover {
     color: v.$a-color-hover;
   }
+}
+
+ul {
+  color: v.$p-color;
 }
 
 form {

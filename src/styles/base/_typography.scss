@@ -10,6 +10,18 @@ h1 {
   }
 }
 
+h2 {
+  font-size: v.$h2-font;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+p,
+ul {
+  font-size: v.$p-font;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  line-height: v.$p-line-height;
+}
+
 nav {
   font-size: v.$nav-font;
   font-family: "Inter", Arial, Helvetica, sans-serif;
