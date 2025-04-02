@@ -7,7 +7,7 @@ import { fetchData } from "@ts/fetch-data";
 import { displayDataList } from "@ts/display-data";
 export async function main(): Promise<void> {
   const data: Array<ICourseInfo> = await fetchData<Array<ICourseInfo>>(
-    "http://localhost:4000/courses/",
+    "https://dt207g-moment1-backend.azurewebsites.net/courses/",
     {
       method: "GET",
     }

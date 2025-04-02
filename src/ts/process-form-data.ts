@@ -27,7 +27,7 @@ export async function processFormData(e: Event): Promise<void> {
 
   try {
     const response: { message: string } = await fetchData<{ message: string }>(
-      "http://localhost:4000/courses/insert",
+      "https://dt207g-moment1-backend.azurewebsites.net/courses/insert",
       {
         method: "POST",
         headers: {
