@@ -16,10 +16,10 @@
         type="text/css"
       />
     </noscript>
-    <link rel="icon" type="image/svg+xml" href="vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="../vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DT207G-Moment 1</title>
-    <script type="module" crossorigin src="/DT207G-moment1-frontend/js/main-DrB0Fe30.js"></script>
+    <script type="module" crossorigin src="/DT207G-moment1-frontend/js/addCourse-CgpA0Gix.js"></script>
     <link rel="modulepreload" crossorigin href="/DT207G-moment1-frontend/js/fetch-data-Bz6K4JiQ.js">
     <link rel="stylesheet" crossorigin href="/DT207G-moment1-frontend/styles/fetch-data-B5hGwGts.css">
   </head>
@@ -27,24 +27,38 @@
     <nav>
       <ul>
         <li>
-          <a href=".">Homepage</a>
+          <a href="..">Homepage</a>
         </li>
         <li>
-          <a href="add-course/">Add course</a>
+          <a href=".">Add course</a>
         </li>
       </ul>
     </nav>
     <main>
       <h1>Ramschema</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Kurskod</th>
-            <th>Kursnamn</th>
-            <th>Progression</th>
-          </tr>
-        </thead>
-      </table>
+      <form>
+        <div class="label-input-container">
+          <label>
+            Kurskod
+            <input id="course-code" type="text" required />
+          </label>
+          <label>
+            Kursnamn
+            <input id="course-name" type="text" required />
+          </label>
+          <label>
+            Progression
+            <input id="progression" type="text" required />
+          </label>
+          <label>
+            Kursplan
+            <input id="syllabus" type="text" required />
+          </label>
+        </div>
+        <div class="button-wrapper">
+          <button>Lägg till</button>
+        </div>
+      </form>
     </main>
   </body>
 </html>
