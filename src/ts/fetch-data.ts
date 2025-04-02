@@ -1,3 +1,5 @@
+import { IErrorMessage } from "./IErrorMessage";
+
 export async function fetchData<T>(
   url: string,
   options: {
@@ -9,11 +11,17 @@ export async function fetchData<T>(
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
-      throw new Error(`Network error: ${response.status}`);
+      const contentType: string | null = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const errorBody: IErrorMessage = await response.json();
+        throw errorBody;
+      } else {
+        throw new Error(`Unknown error from server`);
+      }
     }
     const data: T = await response.json();
     return data;
   } catch (error: any) {
-    throw new Error(`Fetch error: ${error.message}`);
+    throw error instanceof Error ? error.message : error;
   }
 }

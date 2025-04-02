@@ -1,7 +1,7 @@
 // Styles
 import "@styles/style.scss";
 // Functions
-import { initFormValidation } from "@ts/validate-form";
 import { processFormData } from "./process-form-data";
 
-initFormValidation(processFormData);
+const form: HTMLFormElement = document.querySelector("form")!;
+form.addEventListener("submit", processFormData);
