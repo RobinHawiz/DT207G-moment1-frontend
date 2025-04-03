@@ -1,5 +1,6 @@
 import { CoursePayload } from "@ts/ICourseInfo";
 import { fetchData } from "./fetch-data";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function processFormData(e: Event): Promise<void> {
   e.preventDefault();
@@ -27,7 +28,7 @@ export async function processFormData(e: Event): Promise<void> {
 
   try {
     const response: { message: string } = await fetchData<{ message: string }>(
-      "https://dt207g-moment1-backend.azurewebsites.net/courses/insert",
+      `${API_BASE_URL}/courses/insert`,
       {
         method: "POST",
         headers: {

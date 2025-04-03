@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import { resolve } from "path";
 import checker from "vite-plugin-checker";
 
@@ -7,39 +7,50 @@ const root = "src/pages";
 const publicDir = "../assets";
 const outDir = "../../dist";
 
-export default defineConfig({
-  base,
-  root,
-  publicDir,
-  build: {
-    outDir,
-    emptyOutDir: true,
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, root, "index.html"),
-        addCourse: resolve(__dirname, root, "add-course", "index.html"),
-        about: resolve(__dirname, root, "about", "index.html"),
-      },
-      output: {
-        entryFileNames: "js/[name]-[hash].js", // JS files
-        chunkFileNames: "js/[name]-[hash].js", // Chunked JS files
-        assetFileNames: "styles/[name]-[hash][extname]", // CSS
+export default defineConfig(({ mode }) => {
+  // Load env manually from the actual project root
+  const env = loadEnv(mode, process.cwd(), "");
+
+  return {
+    base,
+    root,
+    publicDir,
+    build: {
+      outDir,
+      emptyOutDir: true,
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, root, "index.html"),
+          addCourse: resolve(__dirname, root, "add-course", "index.html"),
+          about: resolve(__dirname, root, "about", "index.html"),
+        },
+        output: {
+          entryFileNames: "js/[name]-[hash].js",
+          chunkFileNames: "js/[name]-[hash].js",
+          assetFileNames: "styles/[name]-[hash][extname]",
+        },
       },
     },
-  },
-  server: {
-    open: true,
-  },
-  resolve: {
-    alias: {
-      "@assets": resolve(__dirname, "src/assets"),
-      "@ts": resolve(__dirname, "src/ts"),
-      "@styles": resolve(__dirname, "src/styles"),
+    server: {
+      open: true,
     },
-  },
-  plugins: [
-    checker({
-      typescript: true,
-    }),
-  ],
+    resolve: {
+      alias: {
+        "@assets": resolve(__dirname, "src/assets"),
+        "@ts": resolve(__dirname, "src/ts"),
+        "@styles": resolve(__dirname, "src/styles"),
+      },
+    },
+    plugins: [
+      checker({
+        typescript: true,
+      }),
+    ],
+    define: {
+      // Inject env variables into frontend
+      "import.meta.env.VITE_API_BASE_URL": JSON.stringify(
+        env.VITE_API_BASE_URL
+      ),
+    },
+  };
 });
